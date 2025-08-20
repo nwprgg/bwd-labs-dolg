@@ -1,31 +1,17 @@
 import express from "express";
 import Event from "../models/Event.js";
 import User from "../models/User.js";
+import passport from "passport";
 
 const router = express.Router();
 
 /**
  * @swagger
  * /events:
- *   get:
- *     summary: Получить список мероприятий (с пагинацией)
- *     parameters:
- *       - in: query
- *         name: page
- *         schema:
- *           type: integer
- *           example: 1
- *       - in: query
- *         name: limit
- *         schema:
- *           type: integer
- *           example: 10
- *     responses:
- *       200:
- *         description: Список мероприятий с постраничной загрузкой
- *
  *   post:
- *     summary: Создать мероприятие
+ *     summary: Создать мероприятие (требуется авторизация)
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -43,43 +29,34 @@ const router = express.Router();
  *                 type: string
  *                 format: date
  *                 example: 2025-09-01
- *               createdBy:
- *                 type: integer
- *                 example: 1
  *     responses:
  *       201:
  *         description: Мероприятие успешно создано
  */
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      const { title, description, date } = req.body;
 
-router.get("/", async (req, res) => {
-  try {
+      if (!title || !date) {
+        return res.status(400).json({ error: "Название и дата обязательны" });
+      }
 
-    const page = parseInt(req.query.page) || 1;   
-    const limit = parseInt(req.query.limit) || 10;
-    const offset = (page - 1) * limit;
+      const event = await Event.create({
+        title,
+        description,
+        date,
+        createdBy: req.user.id, // берём из токена текущего пользователя
+      });
 
-    const { rows: events, count } = await Event.findAndCountAll({
-      limit,
-      offset,
-      include: [
-        {
-          model: User,
-          attributes: ["id", "name", "email"],
-        },
-      ],
-      order: [["date", "ASC"]], 
-    });
-
-    res.json({
-      total: count,             
-      totalPages: Math.ceil(count / limit),
-      currentPage: page,
-      events,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Ошибка при получении мероприятий" });
+      res.status(201).json({ message: "Мероприятие создано", event });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Ошибка при создании мероприятия" });
+    }
   }
-});
+);
 
 export default router;

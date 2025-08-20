@@ -1,4 +1,3 @@
-// models/Event.js
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
 import User from "./User.js";
@@ -22,7 +21,6 @@ const Event = sequelize.define("Event", {
   },
 });
 
-// 🔗 Связь: один User -> много Event
 User.hasMany(Event, { foreignKey: "createdBy" });
 Event.belongsTo(User, { foreignKey: "createdBy" });
 
