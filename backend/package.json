@@ -10,9 +10,8 @@
     "tsc": "tsc",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write .",
-    "check": "tsc --noEmit && npm run lint",
-    "prepare": "husky install"
-  },
+    "check": "tsc --noEmit && npm run lint"
+    },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -55,11 +54,6 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.8.3"
-  },
-  "lint-staged": {
-    "*.{ts,js}": [
-      "eslint --fix",
-      "prettier --write"
-    ]
   }
+  
 }
