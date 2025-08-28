@@ -46,8 +46,8 @@ const loadSwaggerDoc = (): SwaggerDocument => {
 const swaggerDocument: SwaggerDocument = loadSwaggerDoc();
 
 const limiter: RateLimitRequestHandler = rateLimit({
-  windowMs: 60 * 1000,
-  max: 100,
+  windowMs: 60 * 1000, 
+  max: 100, 
   message: 'Слишком много запросов с этого IP, пожалуйста, попробуйте позже.',
   headers: true,
   statusCode: 429,

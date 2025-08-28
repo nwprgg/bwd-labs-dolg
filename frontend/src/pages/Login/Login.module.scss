@@ -1,0 +1,104 @@
+@use "../../styles/mixins" as *;
+
+.loginPage {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(-45deg, #f8f9fa, #e9ecef, #dee2e6, #ced4da);
+  background-size: 400% 400%;
+  animation: gradientBackground 15s ease infinite;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: $dark-color;
+  padding: 2rem;
+
+  .backgroundAnimation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://www.transparenttextures.com/patterns/cubes.png');
+    opacity: 0.05;
+    z-index: 0;
+  }
+
+  .loginContainer {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    max-width: 900px;
+    width: 100%;
+    @include card-shadow;
+    position: relative;
+    z-index: 1;
+  }
+
+  .logoSection {
+    flex: 1;
+    background: linear-gradient(135deg, $primary-color, $secondary-color);
+    padding: 3rem 2rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    }
+
+    .title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      
+      span {
+        font-weight: 300;
+      }
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+  }
+
+  .formSection {
+    flex: 1;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .loginPage {
+    .loginContainer {
+      flex-direction: column;
+    }
+
+    .logoSection {
+      padding: 2rem 1rem;
+      
+      .logo {
+        width: 60px;
+        height: 60px;
+      }
+
+      .title {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

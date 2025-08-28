@@ -1,0 +1,287 @@
+@use "../../../styles/mixins" as *;
+@use "sass:color";
+.emptyState {
+  @include flex-center;
+  flex-direction: column;
+  padding: 3rem;
+  background: white;
+  border-radius: 15px;
+  @include card-shadow;
+  
+  .emptyIcon {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
+  }
+  
+  h3 {
+    color: color.adjust($dark-color, $lightness:30%);
+    margin-bottom: 1.5rem;
+  }
+}
+
+.eventList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.eventCard {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  @include card-shadow;
+  @include transition;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.eventHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  
+  .eventTitle {
+    font-size: 1.3rem;
+    color: $primary-color;
+    margin: 0;
+  }
+  
+  .eventAuthor {
+    font-size: 0.8rem;
+    color: color.adjust($dark-color, $lightness:40%);
+    background: rgba($primary-color, 0.1);
+    padding: 0.2rem 0.5rem;
+    border-radius: 50px;
+  }
+}
+
+.eventDescription {
+  color: color.adjust($dark-color, $lightness:20%);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.eventMeta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  
+  span {
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: color.adjust($dark-color, $lightness:30%);
+  }
+}
+
+.eventActions {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.inputField, .textareaField {
+  padding: 0.8rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+  @include transition;
+  
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.2);
+  }
+}
+
+.textareaField {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.formActions {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.editButton {
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  font-weight: 500;
+  cursor: pointer;
+  @include transition;
+  border: 2px solid $primary-color;
+  background: white;
+  color: $primary-color;
+  font-size: 0.9rem;
+  
+  &:hover {
+    background: $primary-color;
+    color: white;
+  }
+}
+
+.deleteButton {
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  font-weight: 500;
+  cursor: pointer;
+  @include transition;
+  border: 2px solid $error-color;
+  background: white;
+  color: $error-color;
+  font-size: 0.9rem;
+  
+  &:hover {
+    background: $error-color;
+    color: white;
+  }
+}
+
+.saveButton {
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  font-weight: 500;
+  cursor: pointer;
+  @include transition;
+  border: none;
+  background: $success-color;
+  color: white;
+  font-size: 0.9rem;
+  
+  &:hover {
+    background: color.adjust($dark-color, $lightness:-10%);
+  }
+}
+
+.cancelButton {
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  font-weight: 500;
+  cursor: pointer;
+  @include transition;
+  border: 2px solid #ddd;
+  background: white;
+  color: $dark-color;
+  font-size: 0.9rem;
+  
+  &:hover {
+    border-color: $dark-color;
+  }
+}
+.errorBanner {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 12px 24px;
+  border-radius: 4px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 1000;
+  animation: slideIn 0.3s ease-out;
+  
+  .closeError {
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-left: 8px;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    top: -50px;
+    opacity: 0;
+  }
+  to {
+    top: 20px;
+    opacity: 1;
+  }
+}
+
+.confirmationOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.confirmationBox {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  
+  p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    color: #333;
+  }
+}
+
+.confirmationButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  
+  button {
+    padding: 0.6rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    
+    &.confirmButton {
+      background: #f44336;
+      color: white;
+      border: none;
+      
+      &:hover {
+        background: #d32f2f;
+      }
+    }
+    
+    &.cancelButton {
+      background: white;
+      border: 1px solid #ddd;
+      color: #333;
+      
+      &:hover {
+        background: #f5f5f5;
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .eventList {
+    grid-template-columns: 1fr;
+  }
+}
