@@ -73,6 +73,24 @@ const registerUser = async (
   }
 };
 
+export const getCurrentUser = async (req: Request, res: Response) => {
+  if (!req.user) {
+    return res.status(401).json({ message: 'Пользователь не аутентифицирован' });
+  }
+
+  const user = req.user as any; 
+
+  res.json({
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role ?? 'user',
+    }
+  });
+};
+
+
 const loginUser = async (
   req: Request<{}, {}, LoginUserBody>,
   res: Response,
@@ -119,7 +137,7 @@ const loginUser = async (
         failed_attempts: newAttempts,
         ...(shouldLock && {
           is_locked: true,
-          lock_until: new Date(Date.now() + 30 * 60 * 1000), // 30 минут
+          lock_until: new Date(Date.now() + 30 * 60 * 1000), 
         }),
       });
 

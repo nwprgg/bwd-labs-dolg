@@ -1,0 +1,96 @@
+@use "../../../styles/mixins" as *;
+@use "sass:color";
+
+.registerForm {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: $dark-color;
+  font-size: 0.95rem;
+}
+
+.input {
+  width: 90%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  @include transition;
+  
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.2);
+  }
+}
+
+.error {
+  color: $error-color;
+  background: rgba($error-color, 0.1);
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: $primary-color;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+  @include transition;
+  margin-bottom: 1.5rem;
+  
+  &:hover {
+    background: $secondary-color;
+    transform: translateY(-2px);
+  }
+  
+  &:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.footerLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: color.adjust($dark-color, $lightness:30%);
+}
+
+.link {
+  color: $primary-color;
+  text-decoration: none;
+  font-weight: 500;
+  @include transition;
+  
+  &:hover {
+    color: $secondary-color;
+    text-decoration: underline;
+  }
+}
+.divider {
+  color: #ddd;
+}

@@ -17,11 +17,10 @@ class Event extends Model<
   declare title: string;
   declare description: string | null;
   declare date: Date;
-  declare createdBy: number; // Добавляем это поле
+  declare createdBy: number; 
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 
-  // Для ассоциации
   declare user?: NonAttribute<User>;
 }
 
@@ -45,7 +44,6 @@ Event.init(
       allowNull: false,
     },
     createdBy: {
-      // Добавляем это поле
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
@@ -63,7 +61,6 @@ Event.init(
   },
 );
 
-// Добавляем ассоциацию
 Event.belongsTo(User, {
   foreignKey: 'createdBy',
   as: 'user',

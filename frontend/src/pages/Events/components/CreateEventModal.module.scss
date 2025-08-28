@@ -1,0 +1,118 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modalContent {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .errorMessage {
+    color: #ff3333;
+    background: #ffeeee;
+    padding: 0.8rem;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ffcccc;
+  }
+  
+  .closeButton {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+    
+    &:hover {
+      color: #333;
+    }
+  }
+  
+  h2 {
+    margin-top: 0;
+    color: #4361ee;
+  }
+  
+  .formGroup {
+    margin-bottom: 1.5rem;
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    input, textarea, select {
+      width: 90%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      
+      &:focus {
+        outline: none;
+        border-color: #4361ee;
+      }
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    select.emptySelect {
+      color: #999;
+    }
+  }
+  
+  formRow {
+    display: grid;
+    gap: 1rem;
+    
+    .formGroup {
+      margin-bottom: 0;
+      
+      input {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+  }
+  
+  .submitButton {
+    background: #4361ee;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s;
+    
+    &:hover:not(:disabled) {
+      background: #3a56d4;
+    }
+    
+    &:disabled {
+      background: #cccccc;
+      cursor: not-allowed;
+    }
+  }
